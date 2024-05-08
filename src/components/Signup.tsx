@@ -1,5 +1,6 @@
 "use client";
 
+import { BACKEND_URL } from "@/config";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
@@ -13,7 +14,16 @@ export default function Signup() {
   const onSubmit = async (data: SignInData) => {
     console.log(data);
     try {
-      const response = await axios.post("http://localhost:5000/signup", data, {
+      // -> for local development
+      // const response = await axios.post("http://localhost:5000/signup", data, {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   withCredentials: true,
+      // });
+
+      //deployed on render.com
+      const response = await axios.post(BACKEND_URL, data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -22,7 +32,9 @@ export default function Signup() {
       if (response.data) {
         console.log(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      throw new Error("Error while posting form data.");
+    }
   };
   return (
     <div
