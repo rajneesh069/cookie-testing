@@ -23,7 +23,7 @@ export default function Signup() {
       // });
 
       //deployed on render.com
-      const response = await axios.post(BACKEND_URL, data, {
+      const response = await axios.post(`${BACKEND_URL}/signup`, data, {
         headers: {
           "Content-Type": "application/json",
         },
